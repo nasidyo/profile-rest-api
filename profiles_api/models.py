@@ -16,7 +16,7 @@ class UserProfileManager(BaseUserManager):
         user = self.model(email=email, name=name)
 
         user.set_password(password)
-        user.seve(using=self._db)
+        user.save(using=self._db)
 
         return user
 
@@ -26,21 +26,21 @@ class UserProfileManager(BaseUserManager):
 
         user.is_superuser = True
         user.is_staff = True
-        user.seve(using=self._db)
+        user.save(using=self._db)
 
         return user
 
 class UserProfile(AbstractBaseUser,PermissionsMixin):
     """Database models for users in the systems"""
-    email = models.EmailField(max_length=255, unique=True)
-    name = models.CharField(max_length=255)
+    email = models.EmailField(max_length=254, unique=True)
+    name = models.CharField(max_length=20, unique=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
     objects = UserProfileManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRES_FIELDS = ['name']
+    REQUIRED_FIELDS = ['name']
 
     def get_full_name(self):
         """Retrive full name of user"""
