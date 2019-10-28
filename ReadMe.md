@@ -3,4 +3,4 @@
 Profile REST APT course code.
 
 
-Course part 48 Django
+Course part 52 Django
